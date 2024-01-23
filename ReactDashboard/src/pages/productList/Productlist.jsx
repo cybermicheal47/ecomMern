@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductList.css";
 import { DataGrid } from "@mui/x-data-grid";
 
@@ -7,34 +7,39 @@ import ClearIcon from "@mui/icons-material/Clear";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { productRows } from "../../data";
 import { Link } from "react-router-dom";
+import { DeleteProducts, getProducts } from "../../redux/apicall";
+import { useDispatch, useSelector } from "react-redux";
 function Productlist() {
   const [productdata, setproductdata] = useState(productRows);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getProducts(dispatch);
+  }, [dispatch]);
+
+  const products = useSelector((state) => state.product.products);
 
   const handledelete = (id) => {
-    setproductdata(productdata.filter((item) => item.id !== id));
+    DeleteProducts(id, dispatch);
   };
+
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 230 },
     {
       field: "product",
-      headerName: "Product",
+      headerName: "Products",
       width: 200,
 
       renderCell: (params) => {
         return (
           <div className="productlistitem">
             <img className="productlistImg" src={params.row.img} alt="" />
-            {params.row.name}
+            {params.row.title}
           </div>
         );
       },
     },
-    { field: "stock", headerName: "Stock", width: 200 },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 120,
-    },
+    { field: "inStock", headerName: "Stock", width: 200 },
+
     {
       field: "price",
       headerName: "Price",
@@ -42,18 +47,18 @@ function Productlist() {
     },
     {
       field: "action",
-      headerName: "Action",
+      headerName: "Actions",
       width: 150,
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/product/" + params.row.id}>
+            <Link to={"/product/" + params.row._id}>
               <button className="productlistedit">Edit</button>
             </Link>
 
             <ClearIcon
               className="productlistdelete"
-              onClick={() => handledelete(params.row.id)}
+              onClick={() => handledelete(params.row._id)}
             />
           </>
         );
@@ -64,8 +69,9 @@ function Productlist() {
   return (
     <div className="productlist">
       <DataGrid
-        rows={productdata}
+        rows={products}
         columns={columns}
+        getRowId={(row) => row._id}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 5 },

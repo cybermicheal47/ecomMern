@@ -1,6 +1,23 @@
 import "./largewidgets.css";
 import pic from "../../img/pic.jpg";
+import { useEffect, useState } from "react";
+import { userRequest } from "../../requests";
+import { format } from "timeago.js";
 const Largewidgets = () => {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const getOrders = async () => {
+      try {
+        const response = await userRequest.get("orders");
+        setOrders(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getOrders();
+  }, []);
   const Button = ({ type }) => {
     return <button className={"largewidgetButton " + type}>{type}</button>;
   };
@@ -15,52 +32,18 @@ const Largewidgets = () => {
           <th className="largewidgetTh">Amount</th>
           <th className="largewidgetTh">Status</th>
         </tr>
-        <tr className="largewidgetTr">
-          <td className="largewidgetUser">
-            <img src={pic} alt="" className="largewidgetImg" />
-            <span className="largewidgetName">John Snow</span>
-          </td>
-          <td className="largewidgetDate">5 Jan 2024</td>
-          <td className="largewidgetAmount">$12.00</td>
-          <td className="largewidgetStatus">
-            <Button type="Approved" />
-          </td>
-        </tr>
-        <tr className="largewidgetTr">
-          <td className="largewidgetUser">
-            <img src={pic} alt="" className="largewidgetImg" />
-            <span className="largewidgetName">John Snow</span>
-          </td>
-          <td className="largewidgetDate">5 Jan 2024</td>
-          <td className="largewidgetAmount">$12.00</td>
-          <td className="largewidgetStatus">
-            <Button type="Approved" />
-          </td>
-        </tr>
-
-        <tr className="largewidgetTr">
-          <td className="largewidgetUser">
-            <img src={pic} alt="" className="largewidgetImg" />
-            <span className="widgetLgName">John Snow</span>
-          </td>
-          <td className="largewidgetDate">5 Jan 2024</td>
-          <td className="largewidgetAmount">$12.00</td>
-          <td className="largewidgetStatus">
-            <Button type="Declined" />
-          </td>
-        </tr>
-
-        <tr className="largewidgetTr">
-          <td className="largewidgetUser">
-            <img src={pic} alt="" className="largewidgetImg" />
-            <span className="largewidgetName">John Snow</span>
-          </td>
-          <td className="largewidgetDate">5 Jan 2024</td>
-          <td className="largewidgetAmount">$12.00</td>
-          <td className="largewidgetStatus">
-            <Button type="Pending" />
-          </td>
-        </tr>
+        {orders.map((order) => (
+          <tr className="largewidgetTr">
+            <td className="largewidgetUser">
+              <span className="largewidgetName">{order.userId}</span>
+            </td>
+            <td className="largewidgetDate">{format(order.createdAt)}</td>
+            <td className="largewidgetAmount">${order.amount}</td>
+            <td className="largewidgetStatus">
+              <Button type={order.status} />
+            </td>
+          </tr>
+        ))}
       </table>
     </div>
   );
