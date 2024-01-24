@@ -15,8 +15,11 @@ import Cart from "./pages/Cart";
 import Navbarx from "./components/Navbar/Navbarx";
 import PaymentForm from "./components/PaymentForm";
 import { useSelector } from "react-redux";
-
+import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 const App = () => {
+  if (process.env.NODE_ENV === "production") {
+    disableReactDevTools();
+  }
   const user = useSelector((state) => state.user.currentUser);
   return (
     <Router>
