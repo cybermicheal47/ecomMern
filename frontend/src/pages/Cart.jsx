@@ -9,6 +9,9 @@ import { Add, Remove } from "@mui/icons-material";
 import { Mobile } from "../responsive";
 import { useSelector } from "react-redux";
 import PaymentForm from "../components/PaymentForm";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../redux/cartRedux";
 
 const Container = styled.div``;
 
@@ -168,17 +171,38 @@ const PaymentFormWrapper = styled.div`
   transform: translate(-50%, -50%);
   z-index: 999;
 `;
+const Button = styled.button`
+  padding: 16px;
+  border: 2px solid lightgreen;
+  background-color: white;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lightgreen;
+    color: white;
+  }
+`;
 
 function Cart() {
   const cart = useSelector((state) => state.cart);
   const [showPaymentForm, setShowPaymentForm] = useState(false);
+
+  const [product, setproduct] = useState({});
+  const dispatch = useDispatch();
+
   const handleCheckout = () => {
     setShowPaymentForm(true);
   };
 
   const handlePaymentFormClose = () => {
     setShowPaymentForm(false);
+    dispatch(clearCart());
   };
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
+
   return (
     <Container>
       <Announcement />
@@ -187,12 +211,16 @@ function Cart() {
         <Title>Your Product</Title>
 
         <Top>
-          <Topbutton> Continue Shopping</Topbutton>
+          <Link to="/">
+            <Topbutton> Continue Shopping</Topbutton>
+          </Link>
           <TopTexts>
             <TopText> Cart ({cart.products.length}) </TopText>
-            <TopText>Your WishList(0) </TopText>
           </TopTexts>
-          <Topbutton type="filled"> CheckOut</Topbutton>
+          <Topbutton type="filled" onClick={handleClearCart}>
+            {" "}
+            Empty Cart
+          </Topbutton>
         </Top>
 
         <Bottom>
@@ -218,16 +246,16 @@ function Cart() {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add />
                     <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove />
                   </ProductAmountContainer>
+
                   <ProductPrice>
                     $ {product.price * product.quantity}
                   </ProductPrice>
                 </PriceDetail>
               </Product>
             ))}
+
             <Hr />
           </Info>
           <Summary>
@@ -238,15 +266,9 @@ function Cart() {
               <SummaryItemPrice> ${cart.total}</SummaryItemPrice>
             </SummaryItem>
 
-            <SummaryItem>
-              <SummaryItemText> Estimated Shipping: </SummaryItemText>
-              <SummaryItemPrice> $50</SummaryItemPrice>
-            </SummaryItem>
+            <SummaryItem></SummaryItem>
 
-            <SummaryItem>
-              <SummaryItemText> Shipping Discount:</SummaryItemText>
-              <SummaryItemPrice> $-6</SummaryItemPrice>
-            </SummaryItem>
+            <SummaryItem></SummaryItem>
 
             <SummaryItem type="total">
               <SummaryItemText> Total</SummaryItemText>

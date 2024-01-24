@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../redux/cartRedux";
 
 const FormWrapper = styled.div`
   padding: 20px;
@@ -51,6 +53,7 @@ const PaymentForm = () => {
   const [billingAddress, setBillingAddress] = useState("");
   const [error, setError] = useState(null);
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   const handlePayment = async () => {
     try {
@@ -65,6 +68,9 @@ const PaymentForm = () => {
 
       // Redirect the user to the Paystack authorization URL
       window.location.href = authorization_url;
+
+      // Dispatch the clearCart action after successful redirection
+      dispatch(clearCart());
     } catch (err) {
       setError(err.response.data.error);
     }

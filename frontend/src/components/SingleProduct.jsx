@@ -67,25 +67,37 @@ const Icon = styled.div`
   }
 `;
 
+const Button = styled.button`
+  border: none;
+  border-radius: 10px;
+  padding: 16px;
+  background-color: lightgreen;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 16px;
+
+  &:hover {
+    background-color: #cceecc;
+    color: white;
+  }
+`;
+const NavbarLinkExtended = styled(Link)`
+  color: black;
+  font-size: 18px;
+  text-decoration: none;
+  margin: 10px;
+`;
 export default function SingleProduct({ item }) {
   return (
     <Container>
       <Circle />
       <Image src={item.img} />
       <InfoContainer>
-        <Icon>
-          <ShoppingCartOutlined />
-        </Icon>
-
-        <Icon>
-          <Link to={`/product/${item._id}`}>
-            <SearchOutlined />
-          </Link>
-        </Icon>
-
-        <Icon>
-          <FavoriteBorderRounded />
-        </Icon>
+        <Button>
+          <NavbarLinkExtended to={`/product/${item._id}`}>
+            View More
+          </NavbarLinkExtended>
+        </Button>
       </InfoContainer>
     </Container>
   );

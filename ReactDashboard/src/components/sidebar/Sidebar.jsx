@@ -19,30 +19,11 @@ const Sidebar = () => {
         <div className="sidecontainermenu">
           <h3 className="sidetitle">Dashboard</h3>
           <ul className="sidelist">
-            <li className="sidelistitem">
-              <HomeIcon className="muicon" /> Home
-            </li>
-            <li className="sidelistitem">
-              <StoreIcon className="muicon" /> Sales
-            </li>
-            <li className="sidelistitem">
-              <InsightsIcon className="muicon" /> Analytics
-            </li>
-          </ul>
-        </div>
-
-        <div className="sidecontainermenu">
-          <h3 className="sidetitle"></h3>
-          <ul className="sidelist">
-            <li className="sidelistitem">
-              <MessageIcon className="muicon" /> Messsages
-            </li>
-            <li className="sidelistitem">
-              <ApiIcon className="muicon" /> Response
-            </li>
-            <li className="sidelistitem">
-              <EmailIcon className="muicon" /> Mails
-            </li>
+            <Link className="linkt" to="/">
+              <li className="sidelistitem">
+                <HomeIcon className="muicon" /> Home
+              </li>
+            </Link>
           </ul>
         </div>
 
@@ -54,32 +35,6 @@ const Sidebar = () => {
                 <Inventory2Icon className="muicon" /> Products
               </li>
             </Link>
-            <li className="sidelistitem">
-              <SummarizeIcon className="muicon" /> Summary
-            </li>
-            <li className="sidelistitem">
-              <PaidIcon className="muicon" /> Transactions
-            </li>
-            <Link to="/users" className="linkstyle">
-              <li className="sidelistitem">
-                <PeopleAltIcon className="muicon" /> Users
-              </li>
-            </Link>
-          </ul>
-        </div>
-
-        <div className="sidecontainermenu">
-          <h3 className="sidetitle"></h3>
-          <ul className="sidelist">
-            <li className="sidelistitem">
-              <PeopleAltIcon className="muicon" /> Staff
-            </li>
-            <li className="sidelistitem">
-              <SummarizeIcon className="muicon" /> Summary
-            </li>
-            <li className="sidelistitem">
-              <InsightsIcon className="muicon" /> Analytics
-            </li>
           </ul>
         </div>
       </div>

@@ -20,6 +20,9 @@
   font-weight: 900;
   cursor: pointer;
 }
+.linkt {
+  text-decoration: none;
+}
 
 .right {
   display: flex;

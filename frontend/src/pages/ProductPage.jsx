@@ -153,7 +153,7 @@ const ProductPage = () => {
   const handleCart = () => {
     dispatch(
       addProduct({
-        productDetail: { ...product },
+        ...product,
         quantity,
         price: product.price * quantity,
         color,

@@ -11,6 +11,10 @@
   padding: 10px;
 }
 
+.linkt {
+  text-decoration: none;
+}
+
 .sidecontainermenu {
   margin-bottom: 10px;
 }

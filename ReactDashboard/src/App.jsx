@@ -13,9 +13,9 @@ import NewProduct from "./pages/newproduct/NewProduct";
 import Login from "./pages/login/Login";
 
 const App = () => {
-  const admin = JSON.parse(
-    JSON.parse(localStorage.getItem("persist:root")).user
-  ).currentUser.isAdmin;
+  const persistedRoot = JSON.parse(localStorage.getItem("persist:root")) || {};
+  const user = JSON.parse(persistedRoot.user)?.currentUser || {};
+  const admin = user.isAdmin || false;
   return (
     <Router>
       <Routes>

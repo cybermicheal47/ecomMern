@@ -31,10 +31,6 @@ const Smallwidgets = () => {
               <span className="smallwidgetUsername">{user.username}</span>
               <span className="smallwidgetUserTitle">Software Engineer</span>
             </div>
-            <button className="smallwidgetButton">
-              <VisibilityIcon className="smallwidgetIcon" />
-              Display
-            </button>
           </li>
         ))}
       </ul>

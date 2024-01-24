@@ -44,7 +44,6 @@ const Home = () => {
   console.log(userstats);
   return (
     <div className="homecontainer">
-      <Info />
       <Chart data={userstats} title="User Analytics" dataKey="Active" />
       <div className="homewidgets">
         <Smallwidgets />

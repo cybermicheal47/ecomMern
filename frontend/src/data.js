@@ -31,19 +31,19 @@ export const categories = [
     id: 1,
     image: c,
     title: "ART",
-    catName: "Shoe",
+    catName: "sneakers",
   },
   {
     id: 2,
     image: b,
     title: "Painting",
-    catName: "Lace",
+    catName: "sneakers",
   },
   {
     id: 3,
     image: c,
-    title: " Best Snow Case",
-    catName: "Shoe",
+    title: " Best Sneakers",
+    catName: "sneakers",
   },
 ];
 
