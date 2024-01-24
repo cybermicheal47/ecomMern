@@ -1,10 +1,11 @@
 import axios from "axios";
 
-const BACKEND_URL = "https://ecomappi.onrender.com";
+const BACKEND_URL = "https://ecomappi.onrender.com/api";
 
-const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YTY2ODBhZTIyMGYyMjc4NjcyM2IxZSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNTY3MDk2MSwiZXhwIjoxNzA1OTMwMTYxfQ.8ebFxwT0yfCCvLMPpfWV0G05-jngK315WwdeH3QVe8w";
-
+const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
+const currentUser = user && JSON.parse(user).currentUser;
+const TOKEN = currentUser?.accessToken;
+console.log(TOKEN);
 export const publicRequest = axios.create({
   baseURL: BACKEND_URL,
 });
