@@ -57,11 +57,14 @@ const PaymentForm = () => {
 
   const handlePayment = async () => {
     try {
-      const response = await axios.post("http://localhost:3500/paystack", {
-        email,
-        amount: cart.total,
-        billing_address: billingAddress,
-      });
+      const response = await axios.post(
+        "https://ecomappi.onrender.com/paystack",
+        {
+          email,
+          amount: cart.total,
+          billing_address: billingAddress,
+        }
+      );
       // Handle the Paystack response
       const { authorization_url, access_code, reference } = response.data.data;
       console.log(authorization_url);
