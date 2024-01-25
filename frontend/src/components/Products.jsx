@@ -21,8 +21,8 @@ const Products = ({ catName, filter, sort }) => {
       try {
         const results = await axios.get(
           catName
-            ? `http://localhost:3500/api/products?category=${catName}`
-            : " http://localhost:3500/api/products"
+            ? `https://ecomappi.onrender.com/api/products?category=${catName}`
+            : " https://ecomappi.onrender.com/api/products"
         );
         console.log(results);
         setproducts(results.data);
