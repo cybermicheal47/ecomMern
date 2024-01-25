@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { Mobile } from "../responsive";
 import { useState } from "react";
-import apicallLogin from "../redux/apicall";
+import { apicallLogin } from "../redux/apicall";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -60,13 +61,17 @@ const LinkContainer = styled.div`
   gap: 10px;
   margin-top: 10px;
 `;
-const Link = styled.a`
+const Linkt = styled.a`
   cursor: pointer;
   font-size: 14px;
 `;
 
 const Error = styled.span`
   color: red;
+`;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;
 
 const Login = () => {
@@ -101,8 +106,10 @@ const Login = () => {
           {error && <Error>Something went wrong , try again</Error>}
         </Form>
         <LinkContainer>
-          <Link>CREATE A NEW ACCOUNT</Link>
-          <Link>Forgot PASSWORD?</Link>
+          <StyledLink to="/signup">
+            <Linkt>CREATE A NEW ACCOUNT</Linkt>
+          </StyledLink>
+          <Linkt>Forgot PASSWORD?</Linkt>
         </LinkContainer>
       </Wrapper>
     </Container>
